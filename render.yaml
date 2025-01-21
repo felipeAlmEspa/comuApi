@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: comuApi
+    env: php
+    buildCommand: |
+      apt-get update && apt-get install -y php-cli php-mbstring php-xml unzip curl
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/local/bin/composer
+      composer install --no-dev --optimize-autoloader
+    startCommand: php -S 0.0.0.0:8080 -t public
+    publishDirectory: ./public
